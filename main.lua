@@ -1,4 +1,4 @@
--- Roblox Script to play loud music, change sky to a specific asset, and show random images periodically
+-- Roblox Script to play loud music, change sky, and show random images periodically from GitHub
 -- The script is visible only to the person who executed it
 
 local player = game.Players.LocalPlayer  -- Get the local player
@@ -15,7 +15,7 @@ local function stopAndDistortSounds()
     end
 end
 
--- Function to set the sky to a specific scary skybox
+-- Function to set sky to a specific asset
 local function setSky()
     -- Get the Lighting service
     local lighting = game:GetService("Lighting")
@@ -27,7 +27,7 @@ local function setSky()
         end
     end
 
-    -- Create a new Sky instance and set it to the scary sky asset you provided
+    -- Create a new Sky instance and set it to the scary sky asset from Roblox
     local sky = Instance.new("Sky")
     sky.SkyboxBk = "rbxassetid://11651435906"
     sky.SkyboxDn = "rbxassetid://11651435906"
@@ -67,14 +67,13 @@ local function playLoudMusic()
     sound:Play()
 end
 
--- Function to show a random image from a list every 5 seconds
+-- Function to show a random image from the GitHub repository every 5 seconds
 local function showRandomImage()
-    local imageIds = {
-        "rbxassetid://1234567890",  -- Replace with actual image asset ID after uploading to Roblox
-        "rbxassetid://9876543210",  -- Replace with actual image asset ID after uploading to Roblox
-        "rbxassetid://1122334455",  -- Replace with actual image asset ID after uploading to Roblox
-        "rbxassetid://5544332211",  -- Replace with actual image asset ID after uploading to Roblox
-        "rbxassetid://6677889900"   -- Replace with actual image asset ID after uploading to Roblox
+    local imageUrls = {
+        "https://raw.githubusercontent.com/megapxzeeoh/Roblox-scary-visual-script/main/xsmall_scary_49bada248c.png",
+        "https://raw.githubusercontent.com/megapxzeeoh/Roblox-scary-visual-script/main/xsmall_scary_01aae23e3d.png",
+        "https://raw.githubusercontent.com/megapxzeeoh/Roblox-scary-visual-script/main/xsmall_scary_5273bdd278.png",
+        "https://raw.githubusercontent.com/megapxzeeoh/Roblox-scary-visual-script/main/xsmall_scary_74c1039b59.png"
     }
 
     local currentBillboardGui  -- Variable to hold the current displayed image
@@ -85,8 +84,8 @@ local function showRandomImage()
             currentBillboardGui:Destroy()
         end
 
-        -- Pick a random image ID
-        local imageId = imageIds[math.random(#imageIds)]
+        -- Pick a random image URL
+        local imageUrl = imageUrls[math.random(#imageUrls)]
 
         -- Create a new BillboardGui instance
         currentBillboardGui = Instance.new("BillboardGui")
@@ -97,7 +96,7 @@ local function showRandomImage()
         -- Create a new ImageLabel instance
         local imageLabel = Instance.new("ImageLabel")
         imageLabel.Size = UDim2.new(1, 0, 1, 0)
-        imageLabel.Image = imageId
+        imageLabel.Image = imageUrl
         imageLabel.BackgroundTransparency = 1
         imageLabel.Parent = currentBillboardGui
 
