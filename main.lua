@@ -1,17 +1,7 @@
--- Roblox Script to play loud music, change sky to a specific asset, and show random images periodically
+-- Roblox Script to play loud music, change sky to a specific asset, and show random images from GitHub
 -- The script is visible only to the person who executed it
 
 local player = game.Players.LocalPlayer  -- Get the local player
-local httpService = game:GetService("HttpService")
-
--- List of image URLs from your GitHub repository (make sure to replace these URLs with your actual GitHub links)
-local imageUrls = {
-    "https://raw.githubusercontent.com/your-username/your-repo/main/image1.png",
-    "https://raw.githubusercontent.com/your-username/your-repo/main/image2.png",
-    "https://raw.githubusercontent.com/your-username/your-repo/main/image3.png",
-    "https://raw.githubusercontent.com/your-username/your-repo/main/image4.png",
-    "https://raw.githubusercontent.com/your-username/your-repo/main/image5.png"
-}
 
 -- Function to stop and distort all other sounds in the game
 local function stopAndDistortSounds()
@@ -77,15 +67,25 @@ local function playLoudMusic()
     sound:Play()
 end
 
--- Function to show a random image from the GitHub image list every 5 seconds
+-- Function to show a random image from GitHub every 5 seconds
 local function showRandomImage()
+    local imageUrls = {
+        "https://raw.githubusercontent.com/megapxzeeoh/Roblox-scary-visual-script/main/xsmall_scary_49bada248c.png",
+        "https://raw.githubusercontent.com/megapxzeeoh/Roblox-scary-visual-script/main/xsmall_scary_01aae23e3d.png",
+        "https://raw.githubusercontent.com/megapxzeeoh/Roblox-scary-visual-script/main/xsmall_scary_5273bdd278.png",
+        "https://raw.githubusercontent.com/megapxzeeoh/Roblox-scary-visual-script/main/xsmall_scary_74c1039b59.png"
+    }
+
     local currentBillboardGui  -- Variable to hold the current displayed image
 
-    local function displayImage(imageUrl)
+    local function displayImage()
         -- Remove the previous image if it exists
         if currentBillboardGui then
             currentBillboardGui:Destroy()
         end
+
+        -- Pick a random image URL
+        local imageUrl = imageUrls[math.random(#imageUrls)]
 
         -- Create a new BillboardGui instance
         currentBillboardGui = Instance.new("BillboardGui")
@@ -99,18 +99,18 @@ local function showRandomImage()
         imageLabel.Image = imageUrl
         imageLabel.BackgroundTransparency = 1
         imageLabel.Parent = currentBillboardGui
+
+        -- The image will display for 5 seconds before being replaced
     end
 
     -- Loop the image display function every 5 seconds
     while true do
-        -- Pick a random image URL
-        local randomImageUrl = imageUrls[math.random(#imageUrls)]
-        displayImage(randomImageUrl)
+        displayImage()
         wait(5)
     end
 end
 
--- Call the functions to set up the environment, play music, show images
+-- Call the functions to set up the environment, play music, and show images
 stopAndDistortSounds()
 setSky()
 playLoudMusic()
